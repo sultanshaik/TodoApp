@@ -7,6 +7,9 @@ import TodoApi from './utils/api'
 
 const api =  new TodoApi();
 
+const getTaskUrgency = (task) =>{
+   return task.isComplete? false : task.date? (task.date.getTime() < new Date().getTime()):false;
+}
 
 function App() {
 
@@ -16,7 +19,7 @@ function App() {
   const updateTaskList = (copyTaskList,indexOfTask, isComplete) =>{
     const task = copyTaskList[indexOfTask];
     copyTaskList[indexOfTask].isComplete = isComplete;
-    copyTaskList[indexOfTask].isUrgent =copyTaskList[indexOfTask].isComplete? false : task.date? task.date.getTime() < new Date().getTime():false;
+    copyTaskList[indexOfTask].isUrgent  = getTaskUrgency(task);
     copyTaskList.sort((task1, task2)=>sortFunc(task1, task2));
     setTaskList([...copyTaskList]);
   }
@@ -52,7 +55,7 @@ function App() {
           task.dueDate = response.dueDate? new Date(response.dueDate).toLocaleDateString():"";
           task.date = response.dueDate? new Date(response.dueDate):null;
           task.isComplete = response.isComplete;
-          task.isUrgent = task.isComplete? false : task.date? task.date.getTime() < new Date().getTime():false;
+          task.isUrgent = getTaskUrgency(task);
           return task;
         });
         normalizedTaskList.sort((task1, task2)=>sortFunc(task1, task2));
