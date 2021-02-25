@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/sultantodoApp/static/css/main.7d20d7a2.chunk.css",
+    "main.js": "/sultantodoApp/static/js/main.ce32c70f.chunk.js",
+    "main.js.map": "/sultantodoApp/static/js/main.ce32c70f.chunk.js.map",
+    "runtime-main.js": "/sultantodoApp/static/js/runtime-main.11e3aff1.js",
+    "runtime-main.js.map": "/sultantodoApp/static/js/runtime-main.11e3aff1.js.map",
+    "static/js/2.8064e2d7.chunk.js": "/sultantodoApp/static/js/2.8064e2d7.chunk.js",
+    "static/js/2.8064e2d7.chunk.js.map": "/sultantodoApp/static/js/2.8064e2d7.chunk.js.map",
+    "index.html": "/sultantodoApp/index.html",
+    "static/css/main.7d20d7a2.chunk.css.map": "/sultantodoApp/static/css/main.7d20d7a2.chunk.css.map",
+    "static/js/2.8064e2d7.chunk.js.LICENSE.txt": "/sultantodoApp/static/js/2.8064e2d7.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.11e3aff1.js",
+    "static/js/2.8064e2d7.chunk.js",
+    "static/css/main.7d20d7a2.chunk.css",
+    "static/js/main.ce32c70f.chunk.js"
+  ]
+}
