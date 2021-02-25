@@ -13,6 +13,7 @@
     "sass": "^1.32.8",
     "web-vitals": "^1.0.1"
   },
+  "homepage": "sultantodoApp",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

@@ -1,3 +1,6 @@
-@mixin taskCode($color) {
+@mixin taskCode($color , $textdecor:null) {
     background-color:  $color;
+    @if $textdecor{
+    text-decoration: line-through;
+    }
 }

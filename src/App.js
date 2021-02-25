@@ -21,12 +21,14 @@ function App() {
     setTaskList([...copyTaskList]);
   }
 
-  const apiPatchCall = async (id ,copyTaskList,indexOfTask,isComplete) =>{
+  const apiPatchCall = async (taskId , isComplete) =>{
     try{
-      api.updateTodoList(id);
+      await api.updateTodoList(taskId);
     }
     catch(e){
       console.log(e);
+      const copyTaskList = [...taskList];
+      const indexOfTask = copyTaskList.findIndex(task=>task.id===taskId);
      updateTaskList(copyTaskList,indexOfTask,!isComplete);
     }
   }
@@ -35,7 +37,7 @@ function App() {
     const copyTaskList = [...taskList];
     const indexOfTask = copyTaskList.findIndex(task=>task.id===taskId);
     updateTaskList(copyTaskList,indexOfTask, isComplete);
-    apiPatchCall(taskId , copyTaskList,indexOfTask,isComplete);
+    apiPatchCall(taskId , isComplete);
   }
 
 
