@@ -1,9 +1,21 @@
+@import './mixins';
+@import './variables_';
 .taskList{
     .taskItem{
         display: flex;
-        min-width: 250px;
+        min-width: 260px;
         justify-content: space-between;
-        padding-top: 10px;
+        padding: 10px 5px 5px 5px;
+        margin-top: 5px;
+        &.completed{
+            @include taskCode($green);
+        }
+        &.pending{
+            @include taskCode($blue);
+        }
+        &.urgent{
+            @include taskCode($red);
+        }
     }
 }
 

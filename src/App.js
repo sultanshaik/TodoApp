@@ -35,8 +35,9 @@ function App() {
           task.id = response.id;
           task.description = response.description;
           task.dueDate = response.dueDate? new Date(response.dueDate).toLocaleDateString():"";
-          task.dueDateInSeconds = response.dueDate? new Date(response.dueDate):null;
-          task.isComplete = response.isComplete; 
+          task.date = response.dueDate? new Date(response.dueDate):null;
+          task.isComplete = response.isComplete;
+          task.isUrgent = task.isComplete? false : task.date? task.date.getTime() < new Date().getTime():false;
           return task;
         });
         normalizedTaskList.sort((task1, task2)=>sortFunc(task1, task2));

@@ -15,7 +15,11 @@ const sortFunc =(task1, task2)=>{
       return task1.isComplete - task2.isComplete;
     }
     else{
-      return sortByDate(task1.dueDateInSeconds, task2.dueDateInSeconds);
+      return sortByDate(task1.date, task2.date);
     }
   }
-export {sortFunc};
+
+const getTaskPriority = (task) =>{
+    return task.isComplete ? 'completed' : task.isUrgent ? 'urgent':'pending';
+}  
+export {sortFunc , getTaskPriority};
