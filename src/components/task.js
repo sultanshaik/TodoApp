@@ -1,9 +1,14 @@
 const Task =(props) =>{
-    const {task} = props;
-    return <div>
-          <input type="checkbox" name={`task ${task.id}`}
-    />
-  <label htmlFor={`task ${task.id}`}>{task.description}</label>
+    const {task, updateTask} = props;
+    return <div className="taskItem">
+          <div>
+            <input type="checkbox" name={`task ${task.id}`}  checked={task.isComplete}
+                onChange={()=>{
+                    updateTask(task.id, !task.isComplete);
+                }}
+            />
+            <label htmlFor={`task ${task.id}`}>{task.description}</label>
+        </div>
         <span>{task.dueDate}</span>
         </div>
 }

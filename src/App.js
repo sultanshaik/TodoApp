@@ -3,6 +3,8 @@ import './App.scss';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
+import {sortFunc} from './utils/helper';
+
 const  config = {
   method: 'get',
   url: 'https://944ba3c5-94c3-4369-a9e6-a509d65912e2.mock.pstmn.io/get',
@@ -14,6 +16,16 @@ function App() {
 
   const [taskList, setTaskList] = useState(null);
 
+  const updateTask =(taskId , isComplete)=>{
+    const copyTaskList = [...taskList];
+
+    const indexOfTask = copyTaskList.findIndex(task=>task.id===taskId);
+    copyTaskList[indexOfTask].isComplete = isComplete;
+    copyTaskList.sort((task1, task2)=>sortFunc(task1, task2));
+    setTaskList([...copyTaskList])
+  }
+
+
   useEffect(()=>{
     const getTaskList = async () =>{
       try{
@@ -23,9 +35,11 @@ function App() {
           task.id = response.id;
           task.description = response.description;
           task.dueDate = response.dueDate? new Date(response.dueDate).toLocaleDateString():"";
+          task.dueDateInSeconds = response.dueDate? new Date(response.dueDate):null;
           task.isComplete = response.isComplete; 
           return task;
-        })
+        });
+        normalizedTaskList.sort((task1, task2)=>sortFunc(task1, task2));
         setTaskList(normalizedTaskList);
       }
       catch(e){
@@ -36,8 +50,9 @@ function App() {
   }, [])
 
   return (
-    <div>
-    <TaskList taskList= {taskList} />
+    <div className="container-App">
+    <h1>Todo App </h1>  
+    <TaskList taskList= {taskList} updateTask={updateTask} />
     </div>
   );
 }

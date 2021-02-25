@@ -1,7 +1,9 @@
 .taskList{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+    .taskItem{
+        display: flex;
+        min-width: 250px;
+        justify-content: space-between;
+        padding-top: 10px;
+    }
 }
 
