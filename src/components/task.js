@@ -11,7 +11,7 @@ const Task =(props) =>{
             />
             <label htmlFor={`task ${task.id}`}>{task.description}</label>
         </div>
-        <span>{task.dueDate}</span>
+        {task.dueDate ? <div className="date-due">{task.dueDate}</div>: ''}
         </div>
 }
 export default  Task;

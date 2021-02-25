@@ -1,6 +1,11 @@
+@import './styles/variables_'; 
 .container-App{
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    &.dark {
+        color : white;
+        background-color: black;
+    } 
 }

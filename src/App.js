@@ -1,35 +1,48 @@
 import TaskList from './components/task-list';
 import './App.scss';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 
 import {sortFunc} from './utils/helper';
+import TodoApi from './utils/api'
 
-const  config = {
-  method: 'get',
-  url: 'https://944ba3c5-94c3-4369-a9e6-a509d65912e2.mock.pstmn.io/get',
-  headers: { 
-    'X-Api-Key': ' PMAK-5ef63db179d23c004de50751-10300736bc550d2a891dc4355aab8d7a5c' }
-};
+const api =  new TodoApi();
+
 
 function App() {
 
   const [taskList, setTaskList] = useState(null);
+  const [theme , setTheme] = useState('light');
+
+  const updateTaskList = (copyTaskList,indexOfTask, isComplete) =>{
+    const task = copyTaskList[indexOfTask];
+    copyTaskList[indexOfTask].isComplete = isComplete;
+    copyTaskList[indexOfTask].isUrgent =copyTaskList[indexOfTask].isComplete? false : task.date? task.date.getTime() < new Date().getTime():false;
+    copyTaskList.sort((task1, task2)=>sortFunc(task1, task2));
+    setTaskList([...copyTaskList]);
+  }
+
+  const apiPatchCall = async (id ,copyTaskList,indexOfTask,isComplete) =>{
+    try{
+      api.updateTodoList(id);
+    }
+    catch(e){
+      console.log(e);
+     updateTaskList(copyTaskList,indexOfTask,!isComplete);
+    }
+  }
 
   const updateTask =(taskId , isComplete)=>{
     const copyTaskList = [...taskList];
-
     const indexOfTask = copyTaskList.findIndex(task=>task.id===taskId);
-    copyTaskList[indexOfTask].isComplete = isComplete;
-    copyTaskList.sort((task1, task2)=>sortFunc(task1, task2));
-    setTaskList([...copyTaskList])
+    updateTaskList(copyTaskList,indexOfTask, isComplete);
+    apiPatchCall(taskId , copyTaskList,indexOfTask,isComplete);
   }
 
 
   useEffect(()=>{
     const getTaskList = async () =>{
       try{
-        const {data} = await axios(config);
+        const {data} = await api.getTodoList();
         const normalizedTaskList = data.map(response=>{
           const task = {};
           task.id = response.id;
@@ -51,8 +64,9 @@ function App() {
   }, [])
 
   return (
-    <div className="container-App">
-    <h1>Todo App </h1>  
+    <div className={`container-App ${theme}`}>
+    <h1>Todo App </h1>
+    <button onClick = {()=>setTheme(theme=> theme==='light' ? 'dark' : 'light')}>Switch Theme</button>  
     <TaskList taskList= {taskList} updateTask={updateTask} />
     </div>
   );

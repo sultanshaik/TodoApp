@@ -8,13 +8,35 @@
         padding: 10px 5px 5px 5px;
         margin-top: 5px;
         &.completed{
-            @include taskCode($green);
+            @include taskCode($completed-color);
         }
         &.pending{
-            @include taskCode($blue);
+            @include taskCode($pending-color);
         }
         &.urgent{
-            @include taskCode($red);
+            @include taskCode($urgent-color);
+        }
+        .date-due{
+            border: 2px solid black;
+        }
+    }
+}
+
+.dark{
+    .taskList{
+        .taskItem{
+            &.completed{
+                @include taskCode($dark-completed-color);
+            }
+            &.pending{
+                @include taskCode($dark-pending-color);
+            }
+            &.urgent{
+                @include taskCode($dark-urgent-color);
+            }
+            .date-due{
+                border: 2px solid white;
+            }
         }
     }
 }
